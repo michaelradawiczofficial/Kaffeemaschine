@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Kaffeemaschine Demo – mit einstellbarer Pulver-Reserve</title>
+
+  <!--
+    Externe CSS-Datei für Layout & Design.
+    Die Datei "style.css" liegt im gleichen Ordner wie diese HTML-Datei.
+  -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--
+  Haupt-Container ("Karte") für die Kaffeemaschine.
+  Diese Karte kannst du z.B. als Projekt-Kachel in dein Portfolio einbauen.
+-->
+<div class="card">
+  <!-- Titel der Demo -->
+  <h1>Kaffeemaschine</h1>
+
+  <!-- Untertitel mit den Grundparametern der Maschine -->
+  <div class="subtitle">
+    1L Wasser · 500g Bohnen · 30g / 150ml pro Tasse · Wartung nach 30 Tassen
+  </div>
+
+  <!--
+    Steuerung der Pulver-Reserve:
+    Der Benutzer kann hier einstellen, wie viel Pulver zusätzlich
+    im Vorrat gehalten werden soll (in Gramm).
+  -->
+  <div class="reserve-control">
+    <!-- Beschriftung des Sliders -->
+    <label for="reserveInput" class="reserve-label">
+      Pulver-Reserve:
+    </label>
+
+    <!--
+      Range-Slider (0–50 g).
+      Der Wert wird im Script ausgelesen und in der Berechnung verwendet.
+      "value" legt den Startwert fest (hier 10 g).
+    -->
+    <input
+      type="range"
+      id="reserveInput"
+      min="0"
+      max="50"
+      step="1"
+      value="10"
+      class="reserve-slider"
+    >
+
+    <!--
+      Anzeige des aktuell eingestellten Reservewertes.
+      Wird über JavaScript dynamisch aktualisiert.
+    -->
+    <span id="reserveValue" class="reserve-value">10 g</span>
+
+    <!-- Kurze Erklärung für den Benutzer -->
+    <p class="reserve-hint">
+      Die Maschine versucht, neben einer Tasse Kaffee immer mindestens diese Menge Pulver im Vorrat zu halten.
+    </p>
+  </div>
+
+  <!-- Bedien-Buttons der Kaffeemaschine.
+       Jeder Button ruft eine JavaScript-Funktion auf, die in "script.js" definiert ist. -->
+  <button onclick="handleBrew()">
+    <span class="icon">☕</span> Kaffee zubereiten
+  </button>
+  <button onclick="handleRefillWater()">
+    <span class="icon">💧</span> Wasser auffüllen (auf 1000 ml)
+  </button>
+  <button onclick="handleRefillBeans()">
+    <span class="icon">🌱</span> Bohnen auffüllen (auf 500 g)
+  </button>
+  <button onclick="handleMaintenance()">
+    <span class="icon">🛠️</span> Wartung durchführen
+  </button>
+
+  <!--
+    Log-Ausgabe:
+    Hier werden Textmeldungen angezeigt, z.B.:
+      - "Kaffee zubereitet ..."
+      - "Nicht genug Wasser ..."
+      - "XY g Bohnen gemahlen → ..."
+  -->
+  <div id="log"></div>
+
+  <!--
+    Status-Box:
+    Zeigt die aktuellen Werte der Maschine an.
+    Alle Inhalte werden von "script.js" über updateStatusView() gesetzt.
+  -->
+  <div class="status-box">
+    <div class="status-row">
+      <span class="status-label">Wasser im Tank:</span>
+      <span class="status-value" id="status-water"></span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Bohnen (ganz):</span>
+      <span class="status-value" id="status-beans"></span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Kaffeepulver:</span>
+      <span class="status-value" id="status-ground"></span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Tassen gesamt:</span>
+      <span class="status-value" id="status-cups-total"></span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Tassen seit Wartung:</span>
+      <span class="status-value" id="status-cups-maint"></span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Wartung nötig:</span>
+      <span class="status-value" id="status-maint"></span>
+    </div>
+    <div class="muted">
+      Bohnen werden automatisch gemahlen, wenn für eine Tasse Kaffee und den eingestellten Vorrat zu wenig Pulver vorhanden ist.
+    </div>
+  </div>
+</div>
+
+<!--
+  Externe JavaScript-Datei mit der kompletten Logik.
+  Sie wird am Ende des Body geladen, damit alle DOM-Elemente bereits existieren.
+-->
+<script src="script.js"></script>
+
+</body>
+</html>
