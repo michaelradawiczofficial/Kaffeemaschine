@@ -4,11 +4,11 @@
 
 Willkommen zur Kaffeemaschinen-Simulation!  
 
-Mit dieser Anwendung können Sie die Funktionsweise einer modernen Kaffeemaschine direkt im Browser testen – inklusive Bohnenmahlung, Wasserverbrauch, Pulverreserve und Wartungsintervallen.
+Mit dieser Anwendung kannst Du die Funktionsweise einer modernen Kaffeemaschine direkt im Browser testen – inklusive Bohnenmahlung, Wasserverbrauch, Pulverreserve und Wartungsintervallen.
 
 
 
-Diese Anleitung erklärt Ihnen Schritt für Schritt, wie Sie die Simulation bedienen.
+Diese Anleitung erklärt Ihnen Schritt für Schritt, wie du die Simulation bedienen.
 
 
 
@@ -54,7 +54,7 @@ Die Maschine mahlt automatisch so viel nach, dass trotzdem die richtige Pulverme
 
 Oben in der Anwendung befindet sich ein \*\*Schieberegler (Slider)\*\*.  
 
-Damit können Sie einstellen, wie viel Pulver immer zusätzlich im Vorrat bleiben soll.
+Damit kannst du einstellen, wie viel Pulver immer zusätzlich im Vorrat bleiben soll.
 
 
 
@@ -80,7 +80,7 @@ Wenn nicht genug Pulver vorhanden ist, wird automatisch nachgemahlen.
 
 
 
-Um eine Tasse Kaffee zu beziehen, klicken Sie auf:
+Um eine Tasse Kaffee zu beziehen, klicke auf:
 
 
 
@@ -104,7 +104,7 @@ Die Maschine prüft automatisch:
 
 
 
-Wenn Bohnen fehlen oder nicht gemahlen werden können, erhalten Sie eine entsprechende Meldung.
+Wenn Bohnen fehlen oder nicht gemahlen werden können, erhälts du eine entsprechende Meldung.
 
 
 
@@ -136,7 +136,7 @@ Alle Informationen erscheinen live im Statusbereich.
 
 
 
-Wenn der Wassertank leer ist oder eine Meldung erscheint, klicken Sie:
+Wenn der Wassertank leer ist oder eine Meldung erscheint, klicke auf:
 
 
 
@@ -184,7 +184,7 @@ Solange die Wartung nicht durchgeführt wurde, ist kein Kaffee möglich.
 
 
 
-Klicken Sie:
+Klicke auf:
 
 
 
@@ -240,7 +240,7 @@ Das hilft Ihnen, die Abläufe der Maschine zu verstehen.
 
 
 
-In der Statusbox können Sie jederzeit sehen:
+In der Statusbox kannst du jederzeit sehen:
 
 
 
@@ -286,7 +286,7 @@ Alle Werte werden nach jedem Vorgang automatisch aktualisiert.
 
 
 
-Wenn Sie Fragen zur Bedienung haben oder die Simulation erweitert werden soll, wenden Sie sich gerne an den Entwickler oder erstellen Sie ein Issue im GitHub-Repository.
+Wenn du Fragen zur Bedienung haben oder die Simulation erweitert werden soll, wende dich gerne an mich oder erstellen Sie ein Issue im GitHub-Repository.
 
 
 
