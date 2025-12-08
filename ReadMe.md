@@ -47,7 +47,7 @@ Da das Projekt keine Build-Tools benötigt, kann es direkt im Browser ausgeführ
 
 1.  **Repository klonen:**
     ```bash
-    git clone [https://github.com/DEIN-USER/kaffeemaschine-js.git](https://github.com/DEIN-USER/kaffeemaschine-js.git)
+    git clone [https://github.com/michaelradawiczofficial/Kaffeemaschine.git]
     ```
 
 2.  **Starten:**
