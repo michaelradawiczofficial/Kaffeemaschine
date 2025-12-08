@@ -1,300 +1,62 @@
-\# ☕ Bedienungsanleitung – Kaffeemaschinen-Simulation
+# ☕ JS Kaffeemaschine Simulation
 
+![Status](https://img.shields.io/badge/Status-Finished-success) ![Tech](https://img.shields.io/badge/Stack-HTML%20%7C%20CSS%20%7C%20VanillaJS-yellow)
 
+Eine interaktive Simulation eines Kaffeevollautomaten, entwickelt mit Vanilla JavaScript. Das Projekt demonstriert State-Management, DOM-Manipulation und algorithmische Logik zur Ressourcenberechnung (z.B. Kompensation von Mahlverlusten).
 
-Willkommen zur Kaffeemaschinen-Simulation!  
+## 🌟 Features
 
-Mit dieser Anwendung kannst Du die Funktionsweise einer modernen Kaffeemaschine direkt im Browser testen – inklusive Bohnenmahlung, Wasserverbrauch, Pulverreserve und Wartungsintervallen.
+* **Detailliertes Ressourcen-Management:** Die Maschine verwaltet Wasser (ml), Kaffeebohnen (g) und gemahlenes Pulver (g) in Echtzeit.
+* **Intelligente Mahl-Logik:**
+    * Simuliert **10% Materialverlust** beim Mahlen (Staub/Hitze).
+    * **Automatische Kompensation:** Der Algorithmus berechnet dynamisch, wie viele Bohnen *zusätzlich* gemahlen werden müssen, um trotz Verlust die exakte Zielmenge an Pulver zu erhalten.
+* **Einstellbare Pulver-Reserve:** Über einen Slider kann definiert werden, wie viel gemahlenes Pulver die Maschine *zusätzlich* zur aktuellen Tasse auf Vorrat halten soll (Buffer-Logik).
+* **Wartungs-Zyklus:** Nach 30 Tassen blockiert die Maschine und erzwingt einen Wartungsvorgang.
+* **Modernes UI:** Dunkles Design ("Dark Mode") mit schwebender Karten-Optik und responsivem Layout.
 
+## 🧠 Wie es funktioniert (Logik)
 
+### 1. Der Verlust-Algorithmus
+Eine Besonderheit des Codes ist die Funktion `grindBeans`. Da beim Mahlen 10% (`LOSS_FACTOR = 0.10`) verloren gehen, reicht es nicht, einfach die benötigte Menge vom Bohnenvorrat abzuziehen.
 
-Diese Anleitung erklärt Ihnen Schritt für Schritt, wie du die Simulation bedienen.
+Die Formel zur Berechnung der benötigten Bohnen lautet:
 
+$$Bohnen = \frac{\text{Gewünschtes Pulver}}{1 - \text{Verlustfaktor}}$$
 
+Dies stellt sicher, dass exakt die angeforderte Menge im Pulverbehälter landet.
 
----
+### 2. Die "Brewing"-Pipeline
+Beim Klick auf "Kaffee zubereiten" (`brewCoffee`) passiert folgendes:
+1.  **Check:** Ist Wartung nötig? Ist genug Wasser da?
+2.  **Reserve-Check:** Ist genug Pulver für **1 Tasse + eingestellte Reserve** vorhanden?
+3.  **Action:** Falls nein, wird die Differenz (inkl. Verlustausgleich) frisch nachgemahlen.
+4.  **Result:** Kaffee wird gebrüht, Zähler erhöht, Status-UI aktualisiert.
 
+## 🛠 Technologien
 
+* **HTML5:** Semantische Struktur und Input-Range Slider.
+* **CSS3:** Flexbox-Layout, CSS-Variablen-ähnliche Strukturierung und Hover-Effekte für Buttons.
+* **JavaScript (ES6):**
+    * Keine externen Frameworks (Vanilla JS).
+    * Event-Handling für Buttons und Slider (`addEventListener`, `onclick`).
+    * Status-Objekt Rückgabe (`getStatus()`) zur sauberen Trennung von Logik und View.
 
-\## ⭐ Überblick
+## 🚀 Installation & Nutzung
 
+Da das Projekt keine Build-Tools benötigt, kann es direkt im Browser ausgeführt werden.
 
+1.  **Repository klonen:**
+    ```bash
+    git clone [https://github.com/DEIN-USER/kaffeemaschine-js.git](https://github.com/DEIN-USER/kaffeemaschine-js.git)
+    ```
 
-Die Kaffeemaschine arbeitet mit folgenden Ressourcen:
+2.  **Starten:**
+    Öffne die Datei `index.html` in einem beliebigen modernen Webbrowser.
 
+## 📂 Projektstruktur
 
-
-\- \*\*Wasser:\*\* 1000 ml maximal  
-
-\- \*\*Kaffeebohnen:\*\* 500 g maximal  
-
-\- \*\*Kaffeepulver:\*\* wird automatisch durch Mahlen erzeugt  
-
-\- \*\*Verbrauch pro Tasse:\*\*  
-
-&nbsp; - 150 ml Wasser  
-
-&nbsp; - 30 g Kaffeepulver
-
-
-
-Beim Mahlen der Bohnen gehen \*\*10 % des Pulvers verloren\*\*.  
-
-Die Maschine mahlt automatisch so viel nach, dass trotzdem die richtige Pulvermenge entsteht.
-
-
-
----
-
-
-
-\## 🎛 Pulver-Reserve einstellen
-
-
-
-Oben in der Anwendung befindet sich ein \*\*Schieberegler (Slider)\*\*.  
-
-Damit kannst du einstellen, wie viel Pulver immer zusätzlich im Vorrat bleiben soll.
-
-
-
-\- Bereich: \*\*0 bis 50 Gramm\*\*
-
-\- Beispiel:
-
-&nbsp; - Reserve = 10 g  
-
-&nbsp; - Für die nächste Tasse hält die Maschine mindestens \*\*30 g Pulver + 10 g Reserve\*\* bereit.
-
-
-
-Wenn nicht genug Pulver vorhanden ist, wird automatisch nachgemahlen.
-
-
-
----
-
-
-
-\## ☕ Kaffee zubereiten
-
-
-
-Um eine Tasse Kaffee zu beziehen, klicke auf:
-
-
-
-\### \*\*„☕ Kaffee zubereiten“\*\*
-
-
-
-Die Maschine prüft automatisch:
-
-
-
-1\. Ist genügend Wasser vorhanden?  
-
-2\. Ist genügend Pulver vorhanden?  
-
-3\. Reicht die eingestellte Pulverreserve?  
-
-4\. Sind genügend Bohnen zum Nachmahlen da?  
-
-5\. Ist eine Wartung erforderlich?
-
-
-
-Wenn Bohnen fehlen oder nicht gemahlen werden können, erhälts du eine entsprechende Meldung.
-
-
-
-Nach dem Bezug aktualisiert die Maschine den:
-
-
-
-\- Wasserstand  
-
-\- Bohnenstand  
-
-\- Pulvervorrat  
-
-\- Tassen-Zähler  
-
-\- Wartungsstatus  
-
-
-
-Alle Informationen erscheinen live im Statusbereich.
-
-
-
----
-
-
-
-\## 💧 Wasser auffüllen
-
-
-
-Wenn der Wassertank leer ist oder eine Meldung erscheint, klicke auf:
-
-
-
-\### \*\*„💧 Wasser auffüllen“\*\*
-
-
-
-Der Tank wird wieder auf \*\*1000 ml\*\* gesetzt.
-
-
-
----
-
-
-
-\## 🌱 Bohnen auffüllen
-
-
-
-Wenn die Bohnen fast leer sind oder eine Meldung erscheint:
-
-
-
-\### \*\*„🌱 Bohnen auffüllen“\*\*
-
-
-
-Der Bohnenbehälter wird wieder auf \*\*500 g\*\* gesetzt.
-
-
-
----
-
-
-
-\## 🛠 Wartung durchführen
-
-
-
-Nach \*\*30 Tassen\*\* benötigt die Maschine eine Wartung.
-
-
-
-Solange die Wartung nicht durchgeführt wurde, ist kein Kaffee möglich.
-
-
-
-Klicke auf:
-
-
-
-\### \*\*„🛠 Wartung durchführen“\*\*
-
-
-
-Dadurch wird:
-
-
-
-\- der Wartungsstatus zurückgesetzt  
-
-\- der Zähler „Tassen seit Wartung“ auf 0 gesetzt
-
-
-
----
-
-
-
-\## 📋 Log-Fenster
-
-
-
-Unter den Bedienelementen befindet sich das \*\*Log-Fenster\*\*.
-
-
-
-Hier zeigt die Maschine alle wichtigen Meldungen an, z. B.:
-
-
-
-\- wie viel Bohnen gemahlen wurden  
-
-\- wie viel Pulver erzeugt wurde  
-
-\- ob Wartung notwendig ist  
-
-\- Erfolgsmeldungen wie „Kaffee zubereitet“
-
-
-
-Das hilft Ihnen, die Abläufe der Maschine zu verstehen.
-
-
-
----
-
-
-
-\## 📊 Statusanzeige
-
-
-
-In der Statusbox kannst du jederzeit sehen:
-
-
-
-\- \*\*Wasser im Tank\*\*  
-
-\- \*\*Bohnenvorrat\*\* (ganz)  
-
-\- \*\*Kaffeepulver\*\*  
-
-\- \*\*Tassen gesamt\*\*  
-
-\- \*\*Tassen seit Wartung\*\*  
-
-\- \*\*Wartung nötig\*\* (JA/NEIN)
-
-
-
-Alle Werte werden nach jedem Vorgang automatisch aktualisiert.
-
-
-
----
-
-
-
-\## 📝 Hinweise
-
-
-
-\- Die Simulation läuft vollständig im Browser – Installation ist nicht nötig.
-
-\- Alle Berechnungen wie Mahlverlust, Reserve, Nachmahlen und Wartungsintervalle werden automatisch durchgeführt.
-
-\- Die Simulation zeigt realistische Arbeitsabläufe einer Kaffeemaschine.
-
-
-
----
-
-
-
-\## 💬 Support
-
-
-
-Wenn du Fragen zur Bedienung haben oder die Simulation erweitert werden soll, wende dich gerne an mich oder erstellen Sie ein Issue im GitHub-Repository.
-
-
-
----
-
-
-
-Viel Spaß mit der Kaffeemaschinen-Simulation! ☕✨
-
-
-
+```plaintext
+/
+├── index.html      # UI-Gerüst, Slider und Button-Events
+├── style.css       # Dark Mode Styling und Layout
+└── script.js       # Komplette Anwendungslogik (Mahlwerk, Wartung, State)
